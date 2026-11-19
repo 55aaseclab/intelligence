@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "preview": true,
+  "updatedAt": "2027-04-13T09:00:00.000Z",
+  "collections": [
+    {
+      "id": "field-notes",
+      "title": "Field notes",
+      "description": "A fictional collection for trying the reader.",
+      "domain": "mixed",
+      "monitoringState": "not_configured"
+    },
+    {
+      "id": "field-tools",
+      "title": "Field tools",
+      "description": "A fictional collection for trying the reader.",
+      "domain": "mixed",
+      "monitoringState": "not_configured"
+    }
+  ],
+  "materials": [
+    {
+      "id": "sample-paper",
+      "title": "Comparing water gauges",
+      "collectionIds": [
+        "field-notes"
+      ],
+      "type": "paper",
+      "summary": "Fictional sample for standalone browsing.",
+      "author": "Sample field team",
+      "publishedAt": "2027-04-12",
+      "firstObservedAt": "2027-04-13T09:00:00.000Z",
+      "verification": "unverified",
+      "source": {
+        "name": "Fictional field journal"
+      },
+      "objectIds": [
+        "sample-workshop"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The fictional trial compares readings recorded twice at two sample sites."
+        }
+      ],
+      "paper": {
+        "authors": [
+          "Sample field team"
+        ]
+      }
+    },
+    {
+      "id": "sample-interview",
+      "title": "Working with volunteers",
+      "collectionIds": [
+        "field-notes"
+      ],
+      "type": "interview",
+      "summary": "Fictional sample for standalone browsing.",
+      "author": "Sample field team",
+      "publishedAt": "2027-04-12",
+      "firstObservedAt": "2027-04-13T09:00:00.000Z",
+      "verification": "unverified",
+      "source": {
+        "name": "Fictional field journal"
+      },
+      "objectIds": [
+        "sample-workshop"
+      ],
+      "blocks": [
+        {
+          "type": "transcript",
+          "speaker": "Field volunteer",
+          "text": "We mark the time of each reading.",
+          "startSeconds": 3
+        }
+      ],
+      "interview": {
+        "participants": [
+          "Field volunteer"
+        ],
+        "durationSeconds": 90
+      }
+    },
+    {
+      "id": "sample-comment",
+      "title": "Comparing the readings",
+      "collectionIds": [
+        "field-notes"
+      ],
+      "type": "comment",
+      "summary": "Fictional sample for standalone browsing.",
+      "author": "Sample field team",
+      "publishedAt": "2027-04-12",
+      "firstObservedAt": "2027-04-13T09:00:00.000Z",
+      "verification": "unverified",
+      "source": {
+        "name": "Fictional field journal"
+      },
+      "objectIds": [
+        "sample-workshop"
+      ],
+      "blocks": [
+        {
+          "type": "comment",
+          "author": "Sample reviewer",
+          "text": "Each gauge has a different measurement interval.",
+          "relation": "original"
+        }
+      ],
+      "comment": {
+        "context": "Field note review"
+      }
+    },
+    {
+      "id": "sample-blog",
+      "title": "Packing the field kit",
+      "collectionIds": [
+        "field-tools"
+      ],
+      "type": "blog",
+      "summary": "Fictional sample for standalone browsing.",
+      "author": "Sample field team",
+      "publishedAt": "2027-04-12",
+      "firstObservedAt": "2027-04-13T09:00:00.000Z",
+      "verification": "unverified",
+      "source": {
+        "name": "Fictional field journal"
+      },
+      "objectIds": [
+        "sample-gauge"
+      ],
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Use the illustrated checklist to prepare the sample kit."
+        }
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "sample-workshop",
+      "collectionIds": [
+        "field-notes"
+      ],
+      "type": "organization",
+      "name": "Sample workshop",
+      "summary": "Fictional observation group.",
+      "fields": {},
+      "materialIds": [
+        "sample-paper",
+        "sample-interview",
+        "sample-comment"
+      ]
+    },
+    {
+      "id": "sample-gauge",
+      "collectionIds": [
+        "field-tools"
+      ],
+      "type": "product",
+      "name": "Sample gauge",
+      "summary": "A fictional measuring instrument.",
+      "fields": {
+        "status": "unknown"
+      },
+      "materialIds": [
+        "sample-blog"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "sample-update",
+      "collectionIds": [
+        "field-notes"
+      ],
+      "title": "A new field note",
+      "summary": "The fictional workshop added its first paper.",
+      "kind": "new_material",
+      "occurredAt": "2027-04-12",
+      "firstObservedAt": "2027-04-13T09:00:00.000Z",
+      "materialIds": [
+        "sample-paper"
+      ],
+      "objectIds": [
+        "sample-workshop"
+      ]
+    }
+  ]
+}

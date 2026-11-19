@@ -1,0 +1,9 @@
+{
+  "name": "intelligence",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "description": "情报材料、对象与变化的阅读应用",
+  "engines": { "node": ">=22" },
+  "scripts": { "start": "node src/server.mjs", "test": "node --test tests/*.test.mjs" }
+}
