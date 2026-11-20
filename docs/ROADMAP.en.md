@@ -11,3 +11,7 @@ Publish the app-owned card and data-source contract. Verify synthetic authorized
 ## 0.1.3 · Release identity
 
 Read the health version from package metadata and verify it against the app declaration using an isolated preview HTTP service.
+
+## App-owned Praxis integration
+
+This app owns its reviewed `praxis-integration.mjs`: native entry policy, typed business operations and MCP guidance where supported. Praxis loads that declaration from the installed source and retains authorization, signing, policy leases and audit. Installation does not grant access or start a backend. Existing native interfaces, data ownership and recovery boundaries remain in force.

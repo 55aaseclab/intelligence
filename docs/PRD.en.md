@@ -9,3 +9,7 @@ The app owns a version-1 `praxis-provider.mjs` contract for source-backed workbe
 ## Release identity
 
 App release 0.1.3 reports the packaged application version from `/health`; registration, package metadata and runtime responses agree. Preview and configured data remain read-only.
+
+## App-owned Praxis integration
+
+This app owns its reviewed `praxis-integration.mjs`: native entry policy, typed business operations and MCP guidance where supported. Praxis loads that declaration from the installed source and retains authorization, signing, policy leases and audit. Installation does not grant access or start a backend. Existing native interfaces, data ownership and recovery boundaries remain in force.
