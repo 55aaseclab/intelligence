@@ -79,7 +79,7 @@ test('HTTP serves only readonly typed data in standalone and prefixed paths', as
   const base = await listening(t);
   for (const path of ['/api/intelligence', '/apps/intelligence/api/intelligence']) { const response = await fetch(base + path); assert.equal(response.status, 200); assert.match(response.headers.get('cache-control'), /no-store/); assert.equal((await response.json()).materials.length, 4); }
   const head = await fetch(base + '/api/intelligence', { method: 'HEAD' }); assert.equal(head.status, 200); assert.equal(await head.text(), '');
-  const health = await fetch(base + '/health'); assert.deepEqual(await health.json(), { status: 'ok', appId: 'intelligence', version: '0.1.0', dataMode: 'preview' });
+  const health = await fetch(base + '/health'); assert.deepEqual(await health.json(), { status: 'ok', appId: 'intelligence', version: JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8')).version, dataMode: 'preview' });
   for (const method of ['POST', 'PATCH', 'DELETE', 'PUT']) { const response = await fetch(base + '/api/intelligence', { method, body: '{}' }); assert.equal(response.status, 405); assert.match(response.headers.get('allow'), /GET/); }
   assert.equal((await fetch(base + '/api/intelligence?file=anything')).status, 400);
   assert.equal((await fetch(base + '/fixtures/preview.json')).status, 404);

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "intelligence",
+  "version": "0.1.3",
+  "kind": "app",
+  "name": "Intelligence",
+  "description": "Intelligence sources, entities and changes",
+  "labels": {
+    "en": {
+      "name": "Intelligence",
+      "description": "Intelligence sources, entities and changes"
+    },
+    "zh": {
+      "name": "Intelligence",
+      "description": "情报材料、对象与变化"
+    }
+  },
+  "icon": "public/praxis-icon.svg",
+  "iconAliases": [
+    "/intelligence-icon.svg"
+  ],
+  "path": "/",
+  "port": 4330,
+  "documents": {
+    "prd": {
+      "en": "docs/PRD.en.md",
+      "zh": "docs/PRD.md"
+    }
+  }
+}

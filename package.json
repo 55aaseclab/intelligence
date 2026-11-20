@@ -1,6 +1,6 @@
 {
   "name": "intelligence",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "type": "module",
   "description": "情报材料、对象与变化的阅读应用",

@@ -1,11 +1,12 @@
 import { createServer } from 'node:http';
-import { constants } from 'node:fs';
+import { constants, readFileSync } from 'node:fs';
 import { open, realpath } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { IntelligenceStore } from './store.mjs';
 const APP_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const APP_VERSION = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version;
 const assets = new Map([['/', ['index.html', 'text/html; charset=utf-8']], ['/index.html', ['index.html', 'text/html; charset=utf-8']], ['/app.js', ['app.js', 'text/javascript; charset=utf-8']], ['/styles.css', ['styles.css', 'text/css; charset=utf-8']], ['/icon.svg', ['icon.svg', 'image/svg+xml']], ['/icons.svg', ['icons.svg', 'image/svg+xml']]]);
 function send(response, status, value, head = false, headers = {}) { const bytes = Buffer.from(typeof value === 'string' ? value : JSON.stringify(value)); response.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': bytes.length, ...headers }); response.end(head ? undefined : bytes); }
 export function createIntelligenceServer({ store, dataDir, preview = false, publicDir = join(APP_ROOT, 'public'), fixtureFile } = {}) {
@@ -23,7 +24,7 @@ export function createIntelligenceServer({ store, dataDir, preview = false, publ
       if (pathname === '/api/intelligence' || pathname === '/health') {
         if (url.search) return send(response, 400, { code: 'INVALID_QUERY' }, head);
         const snapshot = await store.read();
-        return send(response, 200, pathname === '/health' ? { status: 'ok', appId: 'intelligence', version: '0.1.0', dataMode: snapshot.preview ? 'preview' : 'configured' } : snapshot, head);
+        return send(response, 200, pathname === '/health' ? { status: 'ok', appId: 'intelligence', version: APP_VERSION, dataMode: snapshot.preview ? 'preview' : 'configured' } : snapshot, head);
       }
       if (pathname === '/favicon.ico') { response.writeHead(204); return response.end(); }
       const asset = assets.get(pathname); if (!asset) return send(response, 404, { code: 'NOT_FOUND' }, head);
