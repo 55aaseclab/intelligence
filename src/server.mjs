@@ -9,8 +9,8 @@ const APP_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const APP_VERSION = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version;
 const assets = new Map([['/', ['index.html', 'text/html; charset=utf-8']], ['/index.html', ['index.html', 'text/html; charset=utf-8']], ['/app.js', ['app.js', 'text/javascript; charset=utf-8']], ['/styles.css', ['styles.css', 'text/css; charset=utf-8']], ['/icon.svg', ['icon.svg', 'image/svg+xml']], ['/icons.svg', ['icons.svg', 'image/svg+xml']]]);
 function send(response, status, value, head = false, headers = {}) { const bytes = Buffer.from(typeof value === 'string' ? value : JSON.stringify(value)); response.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': bytes.length, ...headers }); response.end(head ? undefined : bytes); }
-export function createIntelligenceServer({ store, dataDir, preview = false, publicDir = join(APP_ROOT, 'public'), fixtureFile } = {}) {
-  store ??= new IntelligenceStore({ dataDir, preview, fixtureFile });
+export function createIntelligenceServer({ store, dataDir, preview = false, publicDir = join(APP_ROOT, 'public'), fixtureFile, databaseFile } = {}) {
+  store ??= new IntelligenceStore({ dataDir, preview, fixtureFile, databaseFile });
   return createServer(async (request, response) => {
     response.setHeader('Cache-Control', 'no-store'); response.setHeader('X-Content-Type-Options', 'nosniff'); response.setHeader('Referrer-Policy', 'same-origin');
     response.setHeader('Content-Security-Policy', "default-src 'self';script-src 'self';style-src 'self' 'unsafe-inline';connect-src 'self';img-src 'self' data:;object-src 'none';base-uri 'self';form-action 'none'");
@@ -49,12 +49,13 @@ export function createIntelligenceServer({ store, dataDir, preview = false, publ
 }
 export function loadIntelligenceOptions(env = process.env, argv = process.argv.slice(2)) {
   if (env.INTELLIGENCE_PREVIEW !== undefined && !['0', '1'].includes(env.INTELLIGENCE_PREVIEW)) throw new Error('INTELLIGENCE_PREVIEW must be 0 or 1.');
-  const options = { host: env.INTELLIGENCE_HOST || env.HOST || '127.0.0.1', port: env.INTELLIGENCE_PORT || env.PORT || '4330', preview: env.INTELLIGENCE_PREVIEW === '1', dataDir: env.INTELLIGENCE_DATA_DIR };
+  const options = { host: env.INTELLIGENCE_HOST || env.HOST || '127.0.0.1', port: env.INTELLIGENCE_PORT || env.PORT || '4330', preview: env.INTELLIGENCE_PREVIEW === '1', dataDir: env.INTELLIGENCE_DATA_DIR, databaseFile: env.INTELLIGENCE_DATABASE_FILE };
   for (let index = 0; index < argv.length; index++) {
     const flag = argv[index]; if (flag === '--demo') { options.preview = true; continue; }
-    if (!['--host', '--port', '--data-dir'].includes(flag) || !argv[index + 1]) throw new Error('Usage: npm start -- [--demo] [--host HOST] [--port PORT] [--data-dir DIRECTORY]');
-    options[{ '--host': 'host', '--port': 'port', '--data-dir': 'dataDir' }[flag]] = argv[++index];
+    if (!['--host', '--port', '--data-dir', '--database'].includes(flag) || !argv[index + 1]) throw new Error('Usage: npm start -- [--demo] [--host HOST] [--port PORT] [--data-dir DIRECTORY]');
+    options[{ '--host': 'host', '--port': 'port', '--data-dir': 'dataDir', '--database':'databaseFile' }[flag]] = argv[++index];
   }
+  if(!options.dataDir&&options.databaseFile)options.dataDir=dirname(options.databaseFile);
   options.port = Number(options.port);
   if (!Number.isInteger(options.port) || options.port < 1 || options.port > 65535 || typeof options.host !== 'string' || !/^[a-zA-Z0-9.:-]+$/.test(options.host)) throw new Error('A valid host and port are required.');
   if (!options.preview && (!options.dataDir || !isAbsolute(options.dataDir))) throw new Error('Set INTELLIGENCE_DATA_DIR or explicitly enable preview mode.');

@@ -14,6 +14,7 @@ export function createDeploymentIntegration() { return {
   ],
   "runtime": {
     "INTELLIGENCE_DATA_DIR": "/data/intelligence",
+    "INTELLIGENCE_DATABASE_FILE": "/data/intelligence/intelligence.db",
     "INTELLIGENCE_PREVIEW": "0"
   },
   "businessBindings": {},
