@@ -7,10 +7,10 @@ export function createStorageIntegration() { return {
   },
   "sources": [
     {
-      "kind": "json",
+      "kind": "sqlite",
       "path": "intelligence",
-      "relative": "data.json",
-      "target": "data.json",
+      "relative": "intelligence.db",
+      "target": "intelligence.db",
       "optional": true
     }
   ],
@@ -18,7 +18,7 @@ export function createStorageIntegration() { return {
   relocation: {
   "registeredRoots": [
     {
-      "target": "data.json",
+      "target": "intelligence.db",
       "path": "intelligence",
       "parent": true
     }

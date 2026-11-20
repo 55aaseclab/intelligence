@@ -1,7 +1,10 @@
+import { initializeDatabase } from './database.mjs';
 import { createDemoIntegration } from './demo.mjs';
 import { createStackIntegration } from './stack.mjs';
 import { localCompose } from './local-compose.mjs';
 export function createDeploymentIntegration() { return {
+  initializeDatabase,
+  initialDatabases: [{"path": "intelligence.db", "spaceId": "local", "value": {"schemaVersion": 1, "preview": false, "updatedAt": "${now}", "collections": [{"id": "inbox", "title": "Inbox", "description": "Incoming materials", "domain": "mixed", "monitoringState": "not_configured"}], "materials": [], "objects": [], "events": []}}],
   demo: createDemoIntegration(),
   stack: createStackIntegration(),
   localCompose,
@@ -14,28 +17,7 @@ export function createDeploymentIntegration() { return {
     "INTELLIGENCE_PREVIEW": "0"
   },
   "businessBindings": {},
-  "initialFiles": [
-    {
-      "path": "data.json",
-      "value": {
-        "schemaVersion": 1,
-        "preview": false,
-        "updatedAt": "${now}",
-        "collections": [
-          {
-            "id": "inbox",
-            "title": "Inbox",
-            "description": "Incoming materials",
-            "domain": "mixed",
-            "monitoringState": "not_configured"
-          }
-        ],
-        "materials": [],
-        "objects": [],
-        "events": []
-      }
-    }
-  ],
+  "initialFiles": [],
   "native": {
     "dockerfile": "Dockerfile.praxis",
     "command": [

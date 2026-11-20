@@ -15,3 +15,7 @@ Read the health version from package metadata and verify it against the app decl
 ## App-owned Praxis integration
 
 This app owns its reviewed `praxis-integration.mjs`: native entry policy, typed business operations and MCP guidance where supported. Praxis loads that declaration from the installed source and retains authorization, signing, policy leases and audit. Installation does not grant access or start a backend. Existing native interfaces, data ownership and recovery boundaries remain in force.
+
+## SQLite cutover
+
+Specify preservation, implement the native store and explicit conversion/export, verify synthetic API/native/concurrency and restore parity, then publish the owning revision before the platform pins and deploys it. Preserve old files and original assets.

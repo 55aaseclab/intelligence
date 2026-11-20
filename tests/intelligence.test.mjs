@@ -43,7 +43,7 @@ test('source links require credential-free HTTP and unknown values stay omitted'
 });
 test('configured storage reads current bytes and never rewrites the input', async t => {
   const root = await temporary(t), file = join(root, 'data.json'); await writeFile(file, JSON.stringify(configured()), { mode: 0o600 });
-  const before = hash(await readFile(file)), store = new IntelligenceStore({ dataDir: root });
+  const before = hash(await readFile(file)), store = new IntelligenceStore({ dataDir: root, fixtureFile: file });
   assert.equal((await store.read()).preview, false); assert.equal(hash(await readFile(file)), before);
   const next = configured(); next.collections[0].title = '新版资料'; await writeFile(file, JSON.stringify(next), { mode: 0o600 });
   assert.equal((await store.read()).collections[0].title, '新版资料');

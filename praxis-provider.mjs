@@ -20,10 +20,10 @@ const metadata = {
       "labels": {
         "zh": "只读情报快照"
       },
-      "kind": "json",
+      "kind": "sqlite",
       "location": {
         "env": "INTELLIGENCE_DATA_DIR",
-        "relative": "data.json"
+        "relative": "intelligence.db"
       }
     }
   ],
